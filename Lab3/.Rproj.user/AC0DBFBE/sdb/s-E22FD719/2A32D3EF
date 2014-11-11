@@ -1,0 +1,16 @@
+{
+    "contents" : "library(class)\n\n# prepare environment\nrm(list = ls())\nsetwd(\"D:/Users/Piotrek/Documents/Studia/MRO/Zadania/kNN\")\n\n# read data\nrawData <- read.csv(file=\"breast-cancer-wisconsin.data\",head=FALSE,sep=\",\")\ndataSize = nrow(rawData)\n\ndoThis <- function(k, testSetProportion) {\n  # shuffle rows\n  shuffledData <- rawData[sample(dataSize),]\n  \n  # extract data\n  classToNumber <- function(element) {\n    if (element == \"M\") 1.0 else if (element == \"B\") 0.0 else as.numeric(element)\n  }\n  classes <- shuffledData[, 2]\n#   dataSet <- scale(shuffledData[,-(1:2)])\n  dataSet <- scale(shuffledData[,(2:5)])\n  \n  # prepare set divisions\n  testSetSize = ceiling(testSetProportion * dataSize)\n  computeTestSetIndices <- function (startIndex) {\n    endIndex <- startIndex + testSetSize - 1\n    if (endIndex > dataSize) startIndex:dataSize else startIndex:endIndex\n  }\n  testSetStartIndices <- seq(1, dataSize, testSetSize)\n  testSetIndicesList <- lapply(testSetStartIndices, computeTestSetIndices)\n  \n  computeDifference <- function(i) {\n    testSetRowIndices <- testSetIndicesList[[i]]\n    trainingSetRowIndices <- unlist(testSetIndicesList[-i])\n    \n    trainingSet <- dataSet[trainingSetRowIndices, ]\n    testSet <- dataSet[testSetRowIndices, ]\n    \n    trainingSetClasses <- classes[trainingSetRowIndices]\n    testSetClasses <- classes[testSetRowIndices]\n    \n    computedClasses <- knn(trainingSet, testSet, trainingSetClasses, k)\n    \n    realClassesNum <- sapply(testSetClasses, classToNumber, simplify = TRUE)\n    computedClassesNum <- sapply(computedClasses, classToNumber, simplify = TRUE)\n    \n    abs(realClassesNum - computedClassesNum)\n  }\n  \n  computeSuccessRate <- function(diffs) {\n    1.0 - mean(diffs)\n  }\n  \n  differences <- lapply(1:length(testSetIndicesList), computeDifference)\n  successRates <- unlist(lapply(differences, computeSuccessRate))\n  mean(successRates)\n}\n\nks <- 1:10\ntestSetProportions <- seq(0.1, 0.4, 0.05)\nrepetitions = 20\n\nsuccessRatesSum <- matrix(0, length(ks), length(testSetProportions))\nfor (i in 1:repetitions) {\n  successRatesSum <- successRatesSum + outer(ks, testSetProportions, Vectorize(doThis))\n}\nsuccessRates <- successRatesSum / repetitions\n\nncols <- ncol(successRates)\nnrows <- nrow(successRates)\njet.colors <- colorRampPalette(c(\"red\", \"red\", \"yellow\"))\ncolorCount <- 100\ncolor <- jet.colors(colorCount)\nzfacet <- successRates[-1, -1] + successRates[-1, -ncols] + successRates[-nrows, -1] + successRates[-nrows, -ncols]\nfacetcol <- cut(zfacet, colorCount)\n\npersp(ks, testSetProportions * 100, successRates * 100, theta = -60, phi = 35, expand = 0.5, col = color[facetcol],\n       ticktype = \"detailed\",\n      xlab = \"k\", ylab = \"udzia? danych testowych (%)\", zlab = \"efektywno?? (%)\"\n)\n\nsuccessRates",
+    "created" : 1415724547310.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3148295026",
+    "id" : "2A32D3EF",
+    "lastKnownWriteTime" : 1415724518,
+    "path" : "C:/home/aaaaStudia/Semestr_VII/MRO/Lab3/Piotrka.R",
+    "project_path" : "Piotrka.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

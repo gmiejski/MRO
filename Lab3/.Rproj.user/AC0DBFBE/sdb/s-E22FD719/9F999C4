@@ -1,0 +1,17 @@
+{
+    "contents" : "library(class)\n\ndata <- read.csv(file=\"breast-cancer-wisconsin.data\",head=TRUE,sep=\",\")\ndata <- data[!apply(data,1,function(x)any('?' %in% c(x))),]\ndataSize = nrow(data)\ndata <- data[sample(dataSize),]\ndata.orig <- data\n\ndata <- data.orig\ndata <- scale(data[,c(2:6, 8:10)])\n\nncol(data)\ncolnames(data) <- c(\"clump thickness\",\"cell size\",\"cell shape\",\n                    \"marginal adhesion\",\"Single Epithelial Cell Size\",\n                    \"Bland Chromatin\",\"Normal Nucleoli\",\"Mitoses\") #,\"class\")\ncolnames(data)\n\nsplitRate = 4\ndataInEachPart = ceiling(nrow(data) / splitRate)\n\n\n# for ( x in 0:splitRate-1) {\n#   print ( x*dataInEachPart)  \n  x = 0\n  testSetIndexes = c((x*dataInEachPart):((x+1)*(dataInEachPart -1)))\n  trainingSet = data[-c(testSetIndexes),]\n  clasifier = factor(c(data.orig[-c(testSetIndexes),11]))\n#   trainingSet = trainingSet[,1:10]\n  testSet = data[c(testSetIndexes),]\n  \n  data.knn <- knn(trainingSet, testSet, clasifier, k = 2, prob=TRUE)\n  data.knn  \n  data.knn.diff = data.orig[c(testSetIndexes),11]-(as.integer(data.knn[1:(dataInEachPart-1)])*2)\n  data.knn.diff.ok = length(which(data.knn.diff == 0))\n  data.knn.diff.ok = length(data.knn.diff[data.knn.diff == 0])\n  data.knn.diff.bad = length(which(data.knn.diff != 0))\n  data.knn.diff.ok\n  data.knn.diff.bad\n# }\n\ndata.knn[1:(dataInEachPart-1)]\n# train <- rbind(iris3[1:25,,1], iris3[1:25,,2], iris3[1:25,,3])\n# test <- rbind(iris3[26:50,,1], iris3[26:50,,2], iris3[26:50,,3])\n# cl <- factor(c(rep(\"s\",25), rep(\"c\",25), rep(\"v\",25)))\n# knn(train, test, cl, k = 3, prob=TRUE)\nattributes(.Last.value)\n\n# cut data examples not having all the information\ndata[!apply(data,1,function(x)any('?' %in% c(x))),]\n\ntrainingSet\n",
+    "created" : 1415454455711.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1415294378",
+    "id" : "9F999C4",
+    "lastKnownWriteTime" : 1415491355,
+    "path" : "C:/home/aaaaStudia/Semestr_VII/MRO/Lab3/knn.R",
+    "project_path" : "knn.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
