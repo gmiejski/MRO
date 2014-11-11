@@ -47,7 +47,7 @@ getSuccessRatio <- function (splitRate, knn_k ) {
     successRates[x+1] <- data.knn.diff.ok / (data.knn.diff.ok+data.knn.diff.bad)
   }
 
-  sum(successRates) / length(successRates)
+  mean(successRates)
   
 }
 
