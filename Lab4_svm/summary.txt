@@ -1,0 +1,20 @@
+Najpierw obliczyłem średnią skuteczność svm dla zbioru danych użytego do zadania z knn.
+Dzieliłem zbiór danych na różne fragmenty ( od podziału na 4, do 14 elementów, gdzie jeden zawsze był test setem - rotacyjnie obrany). 
+Dla każdej ilości fragmentów liczyłem średnią skuteczność, a nastęnie liczyłem średnią tych średnich, uzyskując jakiś obraz średniej wartości skuteczności dla danego kernela.
+
+Wyniki prezentują się następująco:
+    kernel      |   mean
+    signoim     |   0.9554005
+    radial      |   0.9625174
+    linear      |   0.9629231
+    polynomial  |   0.9520527
+
+Jak widać "radial" i "linear" wypadają troszeczkę lepiej niż kernel "sigmoid" i "polynomial".
+
+Ponadto można zauważyć minimalną zależność:
+im więcej % całego zbioru danych zajmuje training set, tym większa średnia skuteczność predykcji.
+Zobrazowałem to na przykładowym obrazku dla kernela typu "polynomial" 
+(plik "success_ratio_by_split_proportions.png" )
+
+Ponadto zobrazowałem też pca dla metody svm - plik "svm_pca.png"
+

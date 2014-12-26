@@ -1,0 +1,20 @@
+﻿1-NN - dzielimy dane na 4 fragmenty - 3/4 - training 1/4 testing.
+
+Bierzemy każdy obiekt z testing i znajdujemy najbliższego sąsiada i przypisujemy temu elementowi klasę z tego najbliższego sąsiada.
+
+
+Jak dzielimy an 4 zbiory, to po kolei bierzemy którąś ćwiartkę jako test set. Robimy Knn na training secie i 
+dla test setu liczymy sobie % dobrych klasyfikacji.
+
+I bierzemy sobie średnią z tych klasyfikacji. RObimy to wszystko dla jakiegoś przedziału K i jakichś różnych wartości splita ( na 4,5,6,7... części)
+
+
+
+wykres ilości sąsiadów (k czyli x-owa skłądowa) do sprawności % klasyfikacji ( Y-kowa skłądowa )
+
+zobaczyć jak ilośc danych testowych i treningowych wpływa na epsilon ( wrzucić to na Z-ową oś tego wykresiku)
+
+Przesłać: wykres ten 3d, wnioski ( jakieś 2 ), obrazek 2 wymiarowy PCA na wszystkich danych i dane które się źle klasyfikują na 1 wykresie
+
+
+pakiety - class - procedura knn, 

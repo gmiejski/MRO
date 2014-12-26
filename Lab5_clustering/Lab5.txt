@@ -1,0 +1,30 @@
+Sprawdzić jak zachowuje się Affinity propagation i k-means przy zbiorze danych MNIST
+
+Można dać więcej klastrów ( > 10 )
+
+Badamy clarity - jak czyste są takie klastry pod względem podobieństwa obiektów znajdujących się w danym klastrze - największa ilość takich samych elementów ( tak samo sklasyfikowanych ) / ilość wszystkich elementów w klastrze
+
+
+Taka sama liczba klastrów dla obu metod.
+
+
+Numer klastra  |  Clarity   |  Największa wartość
+0 ->           |  60%       |  "0"
+1 ->           |  90%       |  "2"
+...
+
++ potem policzyć średnią clarity dla każdej z metod.
+
+
+cluster - pakiet dla k-means
+
+k-means - jak to działa?
+mamy 3 klastry, wiemy ile jest klastrów, wybieramy sobie środki klastrów i znajdujemy najbliższych sąsiadóW dla każdego klastra. I znowu liczymy środek, bo się trochę przesuwają, skoro zmieniamy elementy należące do klastrów
+
+Da metoda minimalizuje:
+Suma(i - klastry) Suma ( j - punkty) ||xj - ci||^2
+
+
+UWAGA - zmienjszyć ilość danych do 1000 wierszy
+pierwsza liczba określa wartość jaką przedstawia rysunek ( cyfra od 0 - 9)
+reszta to są density pikseli każdego obrazka - który ma wymiary 28x28 pikseli

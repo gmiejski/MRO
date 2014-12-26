@@ -1,0 +1,13 @@
+SVM - Support Vector Machine - Maszyna wektorów podtrzymujących
+chcemy rozdzieliś hiperpłąszczyzną jakieś dane. Takich płaszczyzn może być wiele 
+
+
+Transforumujemy nasz układ w przestrzeń o innej metryce:
+d(x,y) = K(x,x) + K(y,y) - 2K(x,y) - powstaje przez wzór skróconego mnożenia : K(x,y) = (<x,y> +1) ^ n
+
+Jaki kernel jest najlepszy - nie wiadomo,trzeba sprawdzić wszystkie ( jakieś 3 wybrane z metodzie ) 
+
+porównujemy klasyfikatory KNN z SVM.
+Tutaj nie interesują nas punkty 
+
+90% danych - klasyfikator za pomocą SVM, a następnie cross validacja i sprawdzenie jego efektywności na pozostałych 10%

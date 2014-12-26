@@ -1,0 +1,18 @@
+Oto wyniki mojego eksperymentu na 2 obrazach jeżeli chodzi o falki:
+
+Ogólnie wykonywałem transformację dla falek Haar'a i LA8. 
+
+1) Obraz z liliami:
+  a) Haar, strata -   0.0008652983
+  b) d4,   strata -   0.000632871
+  c) la8, strata -    0.0005358395
+
+2) Inne dzieło sztuki:
+  a) Haar, strata -   0.0005508242
+  b) d4,   strata -   0.0006118169
+  c) la8, strata -    0.0005657707 
+
+Wynika z tego, że falka haara epiej radzi sobie z obrazami w których występują większe kontrasty, bowiem mamy mniejszą stratę.
+
+Stratę liczyłem jako sumę kwadratów wszystkich elementów macierzy różnicy obrazów ( oryginalny oraz ten otrzymany przez inverse dwt) podzielone przez kwadrat wymiaru macierzy.
+
